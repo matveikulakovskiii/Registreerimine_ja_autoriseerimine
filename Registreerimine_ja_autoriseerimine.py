@@ -19,6 +19,8 @@ def Registreerimine():
             sisselogimised.append(ent.get())
             if ent1.get() not in sisselogimised:
                 paroolid.append(ent1.get())
+                print(paroolid)
+                print(sisselogimised)
                 aken=Tk()
                 aken.geometry("400x100")
                 aken.title("Registreerimine ja autoriseerimine")
@@ -62,7 +64,34 @@ def Autoriseerimine():
             btn.pack()
             aken.mainloop()
 
+def muutmine():
+    aken=Tk()
+    aken.geometry("500x400")
+    aken.title("Registreerimine ja autoriseerimine")
+    lbl=Label(aken,text="sisestage oma vana parool või hüüdnimi",font="Times 20", fg="green",bg="lightblue")
+    lbl.pack()
+    q=Entry(aken,font="Times 20", fg="black",bg="lightblue",width=15)
+    q.pack()
+    btn=Button(aken,text="läbivaatus", font="Times 20",bg="lightblue",fg="green",command=muutmine___)
+    btn.pack()
+    aken.mainloop()
 
+def muutmine___():
+    if q.get()!='':
+        if paroolid.index(q.get()) in paroolid:
+            paroolid.index(q.get()).pop()
+            lbl=Label(aken,text="sisestage oma uue parool või hüüdnimi",font="Times 20", fg="green",bg="lightblue")
+            lbl.pack()
+            w=Entry(aken,font="Times 20", fg="black",bg="lightblue",width=15)
+            w.pack()
+            if w.get()!='':
+                if paroolid.index(w.get()) in paroolid:
+                    lbl1=Label(aken,text="Hüüdnimi",font="Times 20", fg="green",bg="lightblue")
+                    lbl1.config(text='See parool on juba olemas')
+                    lbl1.pack(side=BOTTOM)
+                else:
+                    paroolid.index(w.get()).append(paroolid)
+                    print(paroolid)
 
 aken=Tk()
 aken.geometry("700x500")
@@ -90,5 +119,8 @@ btn1.pack()
 
 btn2=Button(aken,text="Random parool", font="Times 20",bg="lightblue",fg="green",command=rparool)
 btn2.pack()
+
+btn3=Button(aken,text="nime või parooli muutmine", font="Times 20",bg="lightblue",fg="green",command=muutmine)
+btn3.pack()
 
 aken.mainloop()
