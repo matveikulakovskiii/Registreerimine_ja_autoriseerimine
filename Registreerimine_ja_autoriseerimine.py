@@ -1,7 +1,9 @@
+from multiprocessing.connection import wait
 from tkinter import *
 from math import *
-paroolid=[]
-sisselogimised=[]
+
+paroolid=['1234']
+sisselogimised=['']
 
 
 
@@ -19,8 +21,6 @@ def Registreerimine():
             sisselogimised.append(ent.get())
             if ent1.get() not in sisselogimised:
                 paroolid.append(ent1.get())
-                print(paroolid)
-                print(sisselogimised)
                 aken=Tk()
                 aken.geometry("400x100")
                 aken.title("Registreerimine ja autoriseerimine")
@@ -72,11 +72,8 @@ def muutmine():
     lbl.pack()
     q=Entry(aken,font="Times 20", fg="black",bg="lightblue",width=15)
     q.pack()
-    btn=Button(aken,text="läbivaatus", font="Times 20",bg="lightblue",fg="green",command=muutmine___)
+    btn=Button(aken,text="läbivaatus", font="Times 20",bg="lightblue",fg="green",)
     btn.pack()
-    aken.mainloop()
-
-def muutmine___():
     if q.get()!='':
         if paroolid.index(q.get()) in paroolid:
             paroolid.index(q.get()).pop()
@@ -92,6 +89,20 @@ def muutmine___():
                 else:
                     paroolid.index(w.get()).append(paroolid)
                     print(paroolid)
+                    aken.mainloop()
+
+def parooli_taastamine():
+    aken=Tk()
+    aken.geometry("500x400")
+    aken.title("Registreerimine ja autoriseerimine")
+    lbl=Label(aken,text="sisestage hüüdnimi",font="Times 20", fg="green",bg="lightblue")
+    lbl.pack()
+    q=Entry(aken,font="Times 20", fg="black",bg="lightblue",width=15)
+    q.pack()
+    if q.get()=='':
+        if sisselogimised.index(q.get()) in paroolid:
+            lbl1=Label(aken,text=f'Teie parool on {sisselogimised.index(q.get())}',font="Times 20", fg="green",bg="lightblue")
+            lbl1.pack()
 
 aken=Tk()
 aken.geometry("700x500")
@@ -120,7 +131,10 @@ btn1.pack()
 btn2=Button(aken,text="Random parool", font="Times 20",bg="lightblue",fg="green",command=rparool)
 btn2.pack()
 
-btn3=Button(aken,text="nime või parooli muutmine", font="Times 20",bg="lightblue",fg="green",command=muutmine)
+btn3=Button(aken,text="Nime või parooli muutmine", font="Times 20",bg="lightblue",fg="green",command=muutmine)
 btn3.pack()
+
+btn4=Button(aken,text="Unustanud parooli taastamine", font="Times 20",bg="lightblue",fg="green",command=parooli_taastamine)
+btn4.pack()
 
 aken.mainloop()
